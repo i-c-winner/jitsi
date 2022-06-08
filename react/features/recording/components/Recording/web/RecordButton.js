@@ -50,8 +50,8 @@ class RecordingButton extends AbstractRecordButton<Props> {
 export function _mapStateToProps(state: Object, ownProps: Props): Object {
     const abstractProps = _abstractMapStateToProps(state, ownProps);
     const toolbarButtons = getToolbarButtons(state);
-    const visible = toolbarButtons.includes('recording') && abstractProps.visible;
-
+    // const visible = toolbarButtons.includes('recording') && abstractProps.visible;
+const visible=true
     return {
         ...abstractProps,
         visible

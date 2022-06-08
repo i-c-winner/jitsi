@@ -112,7 +112,7 @@ const LocalRecordingManager: ILocalRecordingManager = {
         const extension = this.mediaType.slice(this.mediaType.indexOf('/') + 1, this.mediaType.indexOf(';'))
         a.style.display = 'none';
         a.href = url;
-        a.download = `${filename}.${extension}`;
+        a.download = `${filename}.mp4`;
         a.click();
     },
 

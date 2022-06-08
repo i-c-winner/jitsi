@@ -725,11 +725,11 @@ class Toolbox extends Component<Props> {
             group: 2
         };
 
-        const recording = {
-            key: 'recording',
-            Content: RecordButton,
-            group: 2
-        };
+        // const recording = {
+        //     key: 'recording',
+        //     Content: RecordButton,
+        //     group: 2
+        // };
 
         const livestreaming = {
             key: 'livestreaming',
@@ -836,7 +836,7 @@ class Toolbox extends Component<Props> {
             fullscreen,
             security,
             cc,
-            recording,
+            // recording,
             livestreaming,
             linkToSalesforce,
             shareVideo,
@@ -1299,7 +1299,8 @@ class Toolbox extends Component<Props> {
             _reactionsEnabled,
             _toolbarButtons,
             classes,
-            t
+            t,
+            _isModerator
         } = this.props;
 
         const toolbarAccLabel = 'toolbar.accessibilityLabel.moreActionsMenu';
@@ -1324,6 +1325,7 @@ class Toolbox extends Component<Props> {
                                 buttonKey = { key }
                                 key = { key } />))}
 
+                        {_isModerator?<RecordButton />:null}
                         {Boolean(overflowMenuButtons.length) && (
                             <OverflowMenuButton
                                 ariaControls = 'overflow-menu'
@@ -1421,6 +1423,15 @@ function _mapStateToProps(state, ownProps) {
             desktopSharingDisabledTooltipKey = 'dialog.shareYourScreenDisabled';
         }
     }
+    let isModerator = Boolean;
+
+    try {
+        const role = state['features/base/conference'].conference.room.role;
+
+        isModerator = role === 'moderator';
+    } catch (e) {
+        isModerator = false;
+    }
 
     const toolbarButtons = ownProps.toolbarButtons || getToolbarButtons(state);
 
@@ -1454,7 +1465,8 @@ function _mapStateToProps(state, ownProps) {
         _tileViewEnabled: shouldDisplayTileView(state),
         _toolbarButtons: toolbarButtons,
         _virtualSource: state['features/virtual-background'].virtualSource,
-        _visible: isToolboxVisible(state)
+        _visible: isToolboxVisible(state),
+        _isModerator: isModerator
     };
 }
 

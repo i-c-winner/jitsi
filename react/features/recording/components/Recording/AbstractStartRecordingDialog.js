@@ -140,16 +140,18 @@ class AbstractStartRecordingDialog extends Component<Props, State> {
         this._onSharingSettingChanged = this._onSharingSettingChanged.bind(this);
         this._toggleScreenshotCapture = this._toggleScreenshotCapture.bind(this);
 
-        let selectedRecordingService;
+        let selectedRecordingService="local";
 
         // TODO: Potentially check if we need to handle changes of
         // _fileRecordingsServiceEnabled and _areIntegrationsEnabled()
-        if (this.props._fileRecordingsServiceEnabled
-                || !this._areIntegrationsEnabled()) {
-            selectedRecordingService = RECORDING_TYPES.JITSI_REC_SERVICE;
-        } else if (this._areIntegrationsEnabled()) {
-            selectedRecordingService = RECORDING_TYPES.DROPBOX;
-        }
+        /**
+         * Отключаем все варианты сохранения, кроме локального
+         */
+        // if (this.props._fileRecordingsServiceEnabled
+        //         || !this._areIntegrationsEnabled()) {
+        // } else if (this._areIntegrationsEnabled()) {
+        //     selectedRecordingService = RECORDING_TYPES.DROPBOX;
+        // }
 
         this.state = {
             isTokenValid: false,
